@@ -335,7 +335,7 @@ export default function MenuPage() {
                 margin: "0 0 6px 0",
               }}
             >
-              Butuh menu定制?
+              Butuh menu khusus?
             </p>
             <p
               style={{
