@@ -86,16 +86,16 @@ export default function WhatsAppCTA({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "10px",
+            gap: "8px",
             width: "100%",
-            padding: "14px 24px",
+            padding: "16px 24px",
             backgroundColor: state === "ready" ? "#1FA855" : "#25D366",
             color: "#FFFFFF",
             borderRadius: "14px",
             textDecoration: "none",
             fontFamily: "'Inter', sans-serif",
-            fontSize: "15px",
-            fontWeight: 600,
+            fontSize: "16px",
+            fontWeight: 700,
             boxShadow:
               state === "ready"
                 ? "0 4px 14px rgba(31,168,85,0.35)"
@@ -129,9 +129,7 @@ export default function WhatsAppCTA({
             e.currentTarget.style.transform = "scale(1)";
           }}
         >
-          {ctaIcon}
           {ctaText}
-          <Send size={15} />
         </a>
       </div>
     );

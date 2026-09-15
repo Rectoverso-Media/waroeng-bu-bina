@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, Search, Filter } from "lucide-react";
+import { Search } from "lucide-react";
 import { menuItems } from "@/app/data/menu";
-import type { OrderIntent } from "@/app/types";
+import SiteHeader from "@/app/components/SiteHeader";
 
 type Category = "semua" | "makanan" | "sayuran" | "paket" | "minuman";
 
@@ -48,155 +48,91 @@ export default function MenuPage() {
       }}
     >
       {/* Header */}
+      <SiteHeader
+        backHref="/"
+        title="Menu"
+        subtitle={`${menuItems.length} pilihan lezat`}
+      />
+
+      {/* Search */}
+      <div style={{ padding: "12px 20px", position: "relative" }}>
+        <div
+          style={{
+            position: "absolute",
+            left: "32px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            color: "#B3835F",
+            pointerEvents: "none",
+          }}
+        >
+          <Search size={15} />
+        </div>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Cari menu..."
+          style={{
+            width: "100%",
+            padding: "10px 14px 10px 38px",
+            fontSize: "14px",
+            fontFamily: "'Inter', sans-serif",
+            color: "#4E2E1E",
+            backgroundColor: "#FFFFFF",
+            border: "1.5px solid #E8D8C8",
+            borderRadius: "12px",
+            outline: "none",
+            boxSizing: "border-box",
+            transition: "border-color 200ms ease",
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = "#B3835F";
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = "#E8D8C8";
+          }}
+        />
+      </div>
+
+      {/* Category pills */}
       <div
         style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          backgroundColor: "rgba(253, 249, 244, 0.95)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid #E8D8C8",
-          padding: "0 20px",
+          padding: "0 20px 12px",
+          display: "flex",
+          gap: "8px",
+          overflowX: "auto",
+          scrollbarWidth: "none",
         }}
       >
-        <div
-          style={{
-            height: "72px",
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          <Link
-            href="/"
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => setActiveCategory(cat.key)}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "40px",
-              height: "40px",
-              borderRadius: "10px",
-              color: "#4E2E1E",
-              textDecoration: "none",
-              transition: "background-color 150ms ease",
+              padding: "6px 16px",
+              fontSize: "13px",
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: activeCategory === cat.key ? 600 : 400,
+              color:
+                activeCategory === cat.key ? "#FFFFFF" : "#7A5240",
+              backgroundColor:
+                activeCategory === cat.key ? "#4E2E1E" : "#FFFFFF",
+              border:
+                activeCategory === cat.key
+                  ? "1.5px solid #4E2E1E"
+                  : "1.5px solid #E8D8C8",
+              borderRadius: "999px",
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              transition:
+                "background-color 150ms ease, color 150ms ease, border-color 150ms ease",
               flexShrink: 0,
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#F0E6D8";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "transparent";
-            }}
           >
-            <ArrowLeft size={22} strokeWidth={2} />
-          </Link>
-          <div style={{ flex: 1 }}>
-            <h1
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: "20px",
-                fontWeight: 700,
-                color: "#4E2E1E",
-                margin: 0,
-                lineHeight: 1.2,
-              }}
-            >
-              Menu
-            </h1>
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "11px",
-                color: "#9B7060",
-                margin: 0,
-                fontWeight: 500,
-              }}
-            >
-              {menuItems.length} pilihan lezat
-            </p>
-          </div>
-        </div>
-
-        {/* Search */}
-        <div style={{ paddingBottom: "12px", position: "relative" }}>
-          <div
-            style={{
-              position: "absolute",
-              left: "14px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: "#B3835F",
-              pointerEvents: "none",
-            }}
-          >
-            <Search size={15} />
-          </div>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari menu..."
-            style={{
-              width: "100%",
-              padding: "10px 14px 10px 38px",
-              fontSize: "14px",
-              fontFamily: "'Inter', sans-serif",
-              color: "#4E2E1E",
-              backgroundColor: "#FFFFFF",
-              border: "1.5px solid #E8D8C8",
-              borderRadius: "12px",
-              outline: "none",
-              boxSizing: "border-box",
-              transition: "border-color 200ms ease",
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = "#B3835F";
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = "#E8D8C8";
-            }}
-          />
-        </div>
-
-        {/* Category pills */}
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            paddingBottom: "12px",
-            overflowX: "auto",
-            scrollbarWidth: "none",
-          }}
-        >
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              style={{
-                padding: "6px 16px",
-                fontSize: "13px",
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: activeCategory === cat.key ? 600 : 400,
-                color:
-                  activeCategory === cat.key ? "#FFFFFF" : "#7A5240",
-                backgroundColor:
-                  activeCategory === cat.key ? "#4E2E1E" : "#FFFFFF",
-                border:
-                  activeCategory === cat.key
-                    ? "1.5px solid #4E2E1E"
-                    : "1.5px solid #E8D8C8",
-                borderRadius: "999px",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                transition:
-                  "background-color 150ms ease, color 150ms ease, border-color 150ms ease",
-                flexShrink: 0,
-              }}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+            {cat.label}
+          </button>
+        ))}
       </div>
 
       {/* Menu grid */}

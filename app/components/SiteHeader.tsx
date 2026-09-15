@@ -1,23 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, MessageCircle, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, MessageCircle } from "lucide-react";
+import { useState } from "react";
 
-export default function Header() {
+interface SiteHeaderProps {
+  backHref?: string;
+  backLabel?: string;
+  title: string;
+  subtitle?: string;
+}
+
+export default function SiteHeader({
+  backHref,
+  title,
+  subtitle,
+}: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Lock body scroll when drawer is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
 
   return (
     <>
@@ -26,12 +26,11 @@ export default function Header() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          backgroundColor: "rgba(253, 249, 244, 0.92)",
+          backgroundColor: "rgba(253, 249, 244, 0.95)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           borderBottom: "1px solid #E8D8C8",
         }}
-        className="animate-fade-in"
       >
         <div
           style={{
@@ -45,69 +44,105 @@ export default function Header() {
             position: "relative",
           }}
         >
-          {/* Hamburger — positioned left */}
-          <button
-            onClick={() => setMenuOpen(true)}
-            aria-label="Buka menu"
-            type="button"
-            style={{
-              position: "absolute",
-              left: "20px",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "10px",
-              color: "#4E2E1E",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "10px",
-              transition: "background-color 150ms ease",
-              minWidth: "44px",
-              minHeight: "44px",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#F0E6D8";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "transparent";
-            }}
-            onMouseDown={(e) => {
-              e.currentTarget.style.backgroundColor = "#E8D0B8";
-            }}
-            onMouseUp={(e) => {
-              e.currentTarget.style.backgroundColor = "#F0E6D8";
-            }}
-          >
-            <Menu size={26} strokeWidth={2} />
-          </button>
-
-          {/* Logo — centered */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              src="/assets/brand/logo.png"
-              alt="Waroeng Bu Bina"
-              width={208}
-              height={57}
+          {/* Left action — back or hamburger */}
+          {backHref ? (
+            <Link
+              href={backHref}
               style={{
-                objectFit: "contain",
-                height: "57px",
-                width: "auto",
-                maxWidth: "60vw",
+                position: "absolute",
+                left: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "44px",
+                height: "44px",
+                borderRadius: "10px",
+                color: "#4E2E1E",
+                textDecoration: "none",
+                transition: "background-color 150ms ease",
               }}
-              priority
-            />
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#F0E6D8";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M12 4L6 10L12 16"
+                  stroke="#4E2E1E"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          ) : (
+            <button
+              onClick={() => setMenuOpen(true)}
+              aria-label="Buka menu"
+              type="button"
+              style={{
+                position: "absolute",
+                left: "20px",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: "10px",
+                color: "#4E2E1E",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "10px",
+                transition: "background-color 150ms ease",
+                minWidth: "44px",
+                minHeight: "44px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#F0E6D8";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            >
+              <Menu size={26} strokeWidth={2} />
+            </button>
+          )}
+
+          {/* Center title */}
+          <div style={{ textAlign: "center" }}>
+            <h1
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: "18px",
+                fontWeight: 700,
+                color: "#4E2E1E",
+                margin: 0,
+                lineHeight: 1.2,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {title}
+            </h1>
+            {subtitle && (
+              <p
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "11px",
+                  color: "#9B7060",
+                  margin: "2px 0 0 0",
+                  fontWeight: 500,
+                }}
+              >
+                {subtitle}
+              </p>
+            )}
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Drawer — outside <header> for proper stacking */}
+      {/* Mobile Menu Drawer */}
       {menuOpen && (
         <div
           role="dialog"
@@ -214,7 +249,7 @@ export default function Header() {
                       borderRadius: "12px",
                       backgroundColor: "#F0FFF5",
                       border: "1px solid #C8E8D4",
-                      transition: "background-color 150ms ease, transform 150ms ease",
+                      transition: "background-color 150ms ease",
                       marginTop: "12px",
                     }}
                     onMouseEnter={(e) => {
@@ -256,7 +291,7 @@ export default function Header() {
               )}
             </nav>
 
-            {/* Slogan di bawah */}
+            {/* Slogan */}
             <div
               style={{
                 marginTop: "auto",

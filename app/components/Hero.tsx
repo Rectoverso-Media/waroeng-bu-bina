@@ -33,22 +33,23 @@ export default function Hero({ onRequest }: HeroProps) {
         overflow: "hidden",
       }}
     >
-      {/* ── Hero food image — full bleed, primary visual ── */}
+      {/* ── Hero character image — full bleed, primary visual ── */}
       <div
         style={{
           position: "relative",
           height: "440px",
           width: "100%",
           overflow: "hidden",
+          backgroundColor: "#F0E6D8",
         }}
       >
         <Image
-          src="/assets/hero/hero-food.png"
-          alt="Ayam bakar dengan sayuran segar dan sambal — masakan rumahan Bu Bina"
+          src="/assets/brand/bu-bina-hero.png"
+          alt="Bu Bina — pendiri Waroeng Bu Bina yang memasak dengan cinta"
           fill
           style={{
             objectFit: "cover",
-            objectPosition: "center 45%",
+            objectPosition: "center top",
           }}
           sizes="100vw"
           priority
@@ -61,9 +62,9 @@ export default function Hero({ onRequest }: HeroProps) {
             top: 0,
             left: 0,
             right: 0,
-            height: "200px",
+            height: "160px",
             background:
-              "linear-gradient(to bottom, rgba(78,46,30,0.55) 0%, rgba(78,46,30,0.15) 50%, rgba(253,249,244,0) 100%)",
+              "linear-gradient(to bottom, rgba(78,46,30,0.50) 0%, rgba(78,46,30,0.10) 50%, rgba(253,249,244,0) 100%)",
             zIndex: 1,
           }}
         />
@@ -75,14 +76,12 @@ export default function Hero({ onRequest }: HeroProps) {
             bottom: 0,
             left: 0,
             right: 0,
-            height: "240px",
+            height: "260px",
             background:
-              "linear-gradient(to top, #FDF9F4 0%, rgba(253,249,244,0.85) 35%, rgba(253,249,244,0) 100%)",
+              "linear-gradient(to top, #FDF9F4 0%, rgba(253,249,244,0.88) 35%, rgba(253,249,244,0) 100%)",
             zIndex: 1,
           }}
         />
-
-
       </div>
 
       {/* ── Text + input block — overlaps image bottom ── */}

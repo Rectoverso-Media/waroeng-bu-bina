@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { ArrowLeft, User, Phone, MapPin, Calendar, MessageSquare, Check } from "lucide-react";
+import { User, Phone, MapPin, Calendar, MessageSquare, Check } from "lucide-react";
 import { menuItems } from "@/app/data/menu";
 import type { OrderIntent } from "@/app/types";
 import { supabase } from "@/app/lib/supabase";
+import SiteHeader from "@/app/components/SiteHeader";
 
 const ORDER_TYPES: { key: OrderIntent; label: string; desc: string }[] = [
   { key: "hari-ini", label: "Hari ini / besok", desc: "Untuk kebutuhan mendesak" },
@@ -158,75 +158,11 @@ export default function OrderPage() {
       }}
     >
       {/* Header */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          backgroundColor: "rgba(253, 249, 244, 0.95)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid #E8D8C8",
-          padding: "0 20px",
-        }}
-      >
-        <div
-          style={{
-            height: "72px",
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "40px",
-              height: "40px",
-              borderRadius: "10px",
-              color: "#4E2E1E",
-              textDecoration: "none",
-              transition: "background-color 150ms ease",
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#F0E6D8";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "transparent";
-            }}
-          >
-            <ArrowLeft size={22} strokeWidth={2} />
-          </Link>
-          <div>
-            <h1
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: "20px",
-                fontWeight: 700,
-                color: "#4E2E1E",
-                margin: 0,
-                lineHeight: 1.2,
-              }}
-            >
-              Form Pesanan
-            </h1>
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "11px",
-                color: "#9B7060",
-                margin: 0,
-                fontWeight: 500,
-              }}
-            >
-              Isi detail pesanan Anda
-            </p>
-          </div>
-        </div>
-      </div>
+      <SiteHeader
+        backHref="/"
+        title="Form Pesanan"
+        subtitle="Isi detail pesanan Anda"
+      />
 
       <div style={{ padding: "20px" }}>
         {/* Order type */}
