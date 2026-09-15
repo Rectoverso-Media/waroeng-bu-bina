@@ -148,6 +148,7 @@ export default function OrderIntentSection({ onSelectIntent }: OrderIntentSectio
               color: "#4E2E1E",
               margin: "0 0 8px 0",
               lineHeight: 1.2,
+              textAlign: "center",
             }}
           >
             Mau pesan untuk apa?
@@ -158,6 +159,7 @@ export default function OrderIntentSection({ onSelectIntent }: OrderIntentSectio
               fontSize: "12px",
               color: "#9B7060",
               margin: 0,
+              textAlign: "center",
             }}
           >
             Berikut cara Bu Bina bisa membantu kamu.
