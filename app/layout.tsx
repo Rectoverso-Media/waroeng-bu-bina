@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     "Ceritakan kebutuhan makanan kamu. Bu Bina akan membantu menyiapkannya. Masakan rumahan untuk hari yang lebih baik.",
   icons: {
     icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -24,6 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Bu Bina" />
+      </head>
       <body className="antialiased">
         {children}
       </body>
