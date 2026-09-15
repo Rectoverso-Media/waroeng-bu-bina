@@ -165,161 +165,235 @@ export default function OrderIntentSection({ onSelectIntent }: OrderIntentSectio
         </div>
       </RevealOnScroll>
 
-      {/* Horizontal scroll — large card treatment */}
-      <div
-        className="hide-scrollbar"
-        style={{
-          display: "flex",
-          gap: "12px",
-          overflowX: "auto",
-          paddingLeft: "20px",
-          paddingRight: "20px",
-          paddingBottom: "8px",
-          scrollSnapType: "x mkamutory",
-          WebkitOverflowScrolling: "touch",
-        }}
-      >
-        {orderData.map((item, index) => (
+      {/* 2-2-1 grid layout */}
+      <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+        {/* Row 1: 2 cards */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "12px",
+            marginBottom: "12px",
+          }}
+        >
+          {orderData.slice(0, 2).map((item, i) => (
+            <Card key={item.type} item={item} index={i} onSelectIntent={onSelectIntent} />
+          ))}
+        </div>
+
+        {/* Row 2: 2 cards */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "12px",
+            marginBottom: "12px",
+          }}
+        >
+          {orderData.slice(2, 4).map((item, i) => (
+            <Card key={item.type} item={item} index={i + 2} onSelectIntent={onSelectIntent} />
+          ))}
+        </div>
+
+        {/* Row 3: 1 full-width WhatsApp card */}
+        <div
+          key={orderData[4].type}
+          onClick={() => onSelectIntent(orderData[4].type)}
+          className="animate-fade-up"
+          style={{
+            animationDelay: "280ms",
+            animationFillMode: "both",
+          }}
+        >
           <div
-            key={item.type}
-            onClick={() => onSelectIntent(item.type)}
-            className="animate-fade-up"
             style={{
-              scrollSnapAlign: "start",
-              animationDelay: `${index * 70}ms`,
-              animationFillMode: "both",
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+              padding: "14px 18px",
+              backgroundColor: "#F0FFF5",
+              border: "1.5px solid #C8E8D4",
+              borderRadius: "20px",
+              cursor: "pointer",
+              boxShadow: "0 2px 10px rgba(37,211,102,0.08)",
+              transition:
+                "transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 220ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow =
+                "0 6px 18px rgba(37,211,102,0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 2px 10px rgba(37,211,102,0.08)";
             }}
           >
             <div
               style={{
-                width: "100px",
+                width: "52px",
+                height: "52px",
                 flexShrink: 0,
+                borderRadius: "14px",
+                backgroundColor: "#FFFFFF",
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
-                textAlign: "center",
-                padding: "20px 8px 16px",
-                gap: "10px",
-                backgroundColor: item.isWhatsApp ? "#F0FFF5" : "#FAFAF8",
-                border: item.isWhatsApp
-                  ? "1.5px solid #C8E8D4"
-                  : "1.5px solid #F0E6D8",
-                borderRadius: "20px",
-                cursor: "pointer",
-                boxShadow: "0 2px 8px rgba(78,46,30,0.05)",
-                transition:
-                  "transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 220ms ease",
-                position: "relative",
-                overflow: "hidden",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 20px rgba(78,46,30,0.12)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 2px 8px rgba(78,46,30,0.05)";
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px) scale(0.97)";
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px) scale(1)";
+                justifyContent: "center",
+                border: "1px solid #E8F7EF",
               }}
             >
-              {/* Online dot for WhatsApp */}
-              {item.isWhatsApp && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "8px",
-                    right: "8px",
-                    width: "8px",
-                    height: "8px",
-                    borderRadius: "50%",
-                    backgroundColor: "#25D366",
-                    border: "1.5px solid white",
-                  }}
-                />
-              )}
-
-              {/* Icon wrapper — perfectly centered */}
-              <div
-                style={{
-                  width: "64px",
-                  height: "64px",
-                  flexShrink: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {item.icon}
-                </div>
-              </div>
-
-              {/* Title */}
+              {orderData[4].icon}
+            </div>
+            <div style={{ flex: 1 }}>
               <p
                 style={{
                   fontFamily: "'Inter', sans-serif",
-                  fontSize: "13px",
+                  fontSize: "15px",
                   fontWeight: 700,
-                  color: item.isWhatsApp ? "#1A9E3C" : "#4E2E1E",
+                  color: "#1A9E3C",
                   margin: 0,
                   lineHeight: 1.2,
-                  textAlign: "center",
-                  width: "100%",
                 }}
               >
-                {item.title}
+                {orderData[4].title}
               </p>
-
-              {/* Description */}
               <p
                 style={{
                   fontFamily: "'Inter', sans-serif",
-                  fontSize: "11px",
-                  color: "#9B7060",
-                  margin: 0,
+                  fontSize: "12px",
+                  color: "#7A5240",
+                  margin: "4px 0 0 0",
                   lineHeight: 1.4,
-                  textAlign: "center",
-                  width: "100%",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  minHeight: "calc(11px * 1.4 * 2)",
                 }}
               >
-                {item.description}
+                {orderData[4].description}
               </p>
-
-              {/* Bottom accent bar */}
-              <div
-                style={{
-                  width: "32px",
-                  height: "3px",
-                  borderRadius: "2px",
-                  backgroundColor: item.isWhatsApp ? "#25D366" : "#E8D8C8",
-                  margin: "4px auto 0",
-                  transition: "background-color 150ms ease",
-                }}
-              />
             </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              style={{ flexShrink: 0, color: "#25D366" }}
+            >
+              <path
+                d="M4 10h12M12 6l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
-        ))}
+        </div>
       </div>
     </section>
+  );
+}
+
+function Card({
+  item,
+  index,
+  onSelectIntent,
+}: {
+  item: (typeof orderData)[number];
+  index: number;
+  onSelectIntent: (type: OrderIntent) => void;
+}) {
+  return (
+    <div
+      onClick={() => onSelectIntent(item.type)}
+      className="animate-fade-up"
+      style={{
+        animationDelay: `${index * 70}ms`,
+        animationFillMode: "both",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          padding: "20px 12px 16px",
+          gap: "8px",
+          backgroundColor: "#FAFAF8",
+          border: "1.5px solid #F0E6D8",
+          borderRadius: "20px",
+          cursor: "pointer",
+          boxShadow: "0 2px 8px rgba(78,46,30,0.05)",
+          transition:
+            "transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 220ms ease",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-3px)";
+          e.currentTarget.style.boxShadow =
+            "0 8px 18px rgba(78,46,30,0.10)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow =
+            "0 2px 8px rgba(78,46,30,0.05)";
+        }}
+        onMouseDown={(e) => {
+          e.currentTarget.style.transform = "translateY(-1px) scale(0.97)";
+        }}
+        onMouseUp={(e) => {
+          e.currentTarget.style.transform = "translateY(-3px) scale(1)";
+        }}
+      >
+        <div
+          style={{
+            width: "56px",
+            height: "56px",
+            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto",
+          }}
+        >
+          {item.icon}
+        </div>
+        <p
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "13px",
+            fontWeight: 700,
+            color: "#4E2E1E",
+            margin: 0,
+            lineHeight: 1.2,
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
+          {item.title}
+        </p>
+        <p
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "11px",
+            color: "#9B7060",
+            margin: 0,
+            lineHeight: 1.4,
+            textAlign: "center",
+            width: "100%",
+            minHeight: "calc(11px * 1.4 * 2)",
+          }}
+        >
+          {item.description}
+        </p>
+        <div
+          style={{
+            width: "5px",
+            height: "5px",
+            borderRadius: "50%",
+            backgroundColor: "#E8D8C8",
+            marginTop: "4px",
+          }}
+        />
+      </div>
+    </div>
   );
 }
