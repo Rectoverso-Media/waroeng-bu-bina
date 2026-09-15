@@ -53,23 +53,11 @@ const icons: Record<Exclude<OrderIntent, "langsung">, React.ReactNode> = {
   ),
 };
 
-const whatsappIcon = (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="18" cy="18" r="14" fill="#E8F7EF" stroke="#25D366" strokeWidth="1.5"/>
-    <path d="M12 16.5c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6c-1.1 0-2.1-.3-3-.8" stroke="#25D366" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M12.5 21.5v4l3-2" stroke="#25D366" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="15" cy="15" r="1.5" fill="#25D366"/>
-    <circle cx="18" cy="15" r="1.5" fill="#25D366"/>
-    <circle cx="21" cy="15" r="1.5" fill="#25D366"/>
-  </svg>
-);
-
 const orderData: {
-  type: OrderIntent;
+  type: Exclude<OrderIntent, "langsung">;
   title: string;
   description: string;
   icon: React.ReactNode;
-  isWhatsApp?: boolean;
 }[] = [
   {
     type: "hari-ini",
@@ -94,13 +82,6 @@ const orderData: {
     title: "Acara",
     description: "Rapat, pengajian, ulang tahun",
     icon: icons["acara"],
-  },
-  {
-    type: "langsung",
-    title: "Pesan Langsung",
-    description: "Chat dengan Bu Bina",
-    icon: whatsappIcon,
-    isWhatsApp: true,
   },
 ];
 
@@ -197,98 +178,6 @@ export default function OrderIntentSection({ onSelectIntent }: OrderIntentSectio
           ))}
         </div>
 
-        {/* Row 3: 1 full-width WhatsApp card */}
-        <div
-          key={orderData[4].type}
-          onClick={() => onSelectIntent(orderData[4].type)}
-          className="animate-fade-up"
-          style={{
-            animationDelay: "280ms",
-            animationFillMode: "both",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "14px",
-              padding: "14px 18px",
-              backgroundColor: "#F0FFF5",
-              border: "1.5px solid #C8E8D4",
-              borderRadius: "20px",
-              cursor: "pointer",
-              boxShadow: "0 2px 10px rgba(37,211,102,0.08)",
-              transition:
-                "transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 220ms ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 6px 18px rgba(37,211,102,0.15)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 2px 10px rgba(37,211,102,0.08)";
-            }}
-          >
-            <div
-              style={{
-                width: "52px",
-                height: "52px",
-                flexShrink: 0,
-                borderRadius: "14px",
-                backgroundColor: "#FFFFFF",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "1px solid #E8F7EF",
-              }}
-            >
-              {orderData[4].icon}
-            </div>
-            <div style={{ flex: 1 }}>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  color: "#1A9E3C",
-                  margin: 0,
-                  lineHeight: 1.2,
-                }}
-              >
-                {orderData[4].title}
-              </p>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "12px",
-                  color: "#7A5240",
-                  margin: "4px 0 0 0",
-                  lineHeight: 1.4,
-                }}
-              >
-                {orderData[4].description}
-              </p>
-            </div>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              style={{ flexShrink: 0, color: "#25D366" }}
-            >
-              <path
-                d="M4 10h12M12 6l4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
       </div>
     </section>
   );
