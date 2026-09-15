@@ -92,18 +92,18 @@ export default function AboutSection() {
                   aspectRatio: "1 / 1",
                   borderRadius: "20px",
                   overflow: "hidden",
-                  backgroundColor: "#F0E6D8",
+                  backgroundColor: "#FFFFFF",
                   border: "1.5px solid #E8D8C8",
                   boxShadow: "0 4px 14px rgba(78,46,30,0.10)",
                 }}
               >
                 <Image
-                  src="/assets/brand/bu-bina-portrait.png"
+                  src="/assets/brand/tentang-kami.png"
                   alt="Bu Bina — pendiri Waroeng Bu Bina"
                   fill
                   style={{
-                    objectFit: "cover",
-                    objectPosition: "center top",
+                    objectFit: "contain",
+                    objectPosition: "center center",
                   }}
                   sizes="130px"
                 />

@@ -44,12 +44,12 @@ export default function Hero({ onRequest }: HeroProps) {
         }}
       >
         <Image
-          src="/assets/brand/bu-bina-hero.png"
+          src="/assets/hero/bu-bina-hero.png"
           alt="Bu Bina — pendiri Waroeng Bu Bina yang memasak dengan cinta"
           fill
           style={{
-            objectFit: "cover",
-            objectPosition: "center top",
+            objectFit: "contain",
+            objectPosition: "center center",
           }}
           sizes="100vw"
           priority
