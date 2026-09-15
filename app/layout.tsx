@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Ceritakan kebutuhan makanan kamu. Bu Bina akan membantu menyiapkannya. Masakan rumahan untuk hari yang lebih baik.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
   },
 };
 
