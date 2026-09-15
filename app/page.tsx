@@ -261,7 +261,7 @@ export default function HomePage() {
           initialRequest={currentRequest}
           orderDraft={orderDraft as OrderDraft}
           onClose={handleCloseConversation}
-          onSelectOrderType={handleSelectIntent}
+          onSelectOrderType={() => {}}
         />
       )}
     </div>

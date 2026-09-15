@@ -2,22 +2,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import { X, Send } from "lucide-react";
-import WhatsAppCTA from "./WhatsAppCTA";
-import type { OrderIntent, OrderDraft } from "@/app/types";
+import type { OrderDraft } from "@/app/types";
 
 interface Message {
   id: string;
   role: "user" | "bina";
   text: string;
+  showCTA?: boolean;
 }
-
-const ORDER_TYPE_LABELS: Record<OrderIntent, string> = {
-  "hari-ini": "Hari ini / besok",
-  mingguan: "Mingguan",
-  bulanan: "Bulanan",
-  acara: "Acara",
-  langsung: "Langsung",
-};
 
 const BIBA_RESPONSES = [
   "Bisa! Saya bantu pilihkan yang cocok untuk kebutuhan kamu.",
@@ -26,7 +18,11 @@ const BIBA_RESPONSES = [
   "Mantap! Mari saya bantu carikan yang terbaik untuk kamu.",
 ];
 
-function BinaResponse({ text }: { text: string }) {
+function BinaMessage({ text, showCTA, request }: { text: string; showCTA?: boolean; request: string }) {
+  const waUrl = `https://wa.me/62818190692?text=${encodeURIComponent(
+    `Halo Bu Bina!\n\nSaya sudah konsultasi via aplikasi:\n"${request}"\n\nMohon bantuannya ya. Terima kasih!`
+  )}`;
+
   return (
     <div
       style={{
@@ -53,7 +49,7 @@ function BinaResponse({ text }: { text: string }) {
       >
         <span style={{ fontSize: "14px", fontWeight: 700, color: "#4E2E1E" }}>B</span>
       </div>
-      <div>
+      <div style={{ flex: 1, maxWidth: "260px" }}>
         <div
           style={{
             display: "inline-block",
@@ -62,7 +58,7 @@ function BinaResponse({ text }: { text: string }) {
             borderRadius: "4px 16px 16px 16px",
             border: "1px solid #E8D8C8",
             boxShadow: "0 2px 8px rgba(78,46,30,0.06)",
-            maxWidth: "260px",
+            marginBottom: showCTA ? "10px" : 0,
           }}
         >
           <p
@@ -77,6 +73,47 @@ function BinaResponse({ text }: { text: string }) {
             {text}
           </p>
         </div>
+
+        {/* CTA button — opens WhatsApp */}
+        {showCTA && (
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "10px 16px",
+              backgroundColor: "#25D366",
+              color: "#FFFFFF",
+              borderRadius: "12px",
+              textDecoration: "none",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "13px",
+              fontWeight: 600,
+              boxShadow: "0 3px 10px rgba(37,211,102,0.28)",
+              transition: "background-color 150ms ease, transform 150ms ease",
+              marginTop: "6px",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#1FA855";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#25D366";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.211l4.287-1.398A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.138 0-4.146-.677-5.803-1.82l-.416-.272-2.657.868.854-2.61-.287-.445A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            Lanjutkan di WhatsApp
+          </a>
+        )}
+
         <p
           style={{
             fontFamily: "'Inter', sans-serif",
@@ -131,19 +168,15 @@ interface ConversationFlowProps {
   initialRequest: string;
   orderDraft: OrderDraft;
   onClose: () => void;
-  onSelectOrderType: (type: OrderIntent) => void;
+  onSelectOrderType: (type: string) => void;
 }
 
 export default function ConversationFlow({
   initialRequest,
-  orderDraft,
   onClose,
-  onSelectOrderType,
 }: ConversationFlowProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
-  const [showOrderTypes, setShowOrderTypes] = useState(true);
-  const [selectedOrderType, setSelectedOrderType] = useState<OrderIntent | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Add initial user message and bina response
@@ -162,45 +195,10 @@ export default function ConversationFlow({
       },
     ]);
 
-    // Scroll to bottom
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   }, [initialRequest]);
-
-  const handleSelectOrderType = (type: OrderIntent) => {
-    setSelectedOrderType(type);
-    setShowOrderTypes(false);
-
-    const userText = `Saya pesan untuk: ${ORDER_TYPE_LABELS[type]}`;
-    const binaFollowUp =
-      type === "hari-ini"
-        ? "Baik! Untuk kebutuhan hari ini atau besok, saya bisa bantu siapkan. Mau untuk berapa porsi, dan ada preferensi menu tertentu?"
-        : type === "mingguan"
-        ? "Untuk mingguan, saya biasanya susun menu yang variatif supaya tidak monoton. Ada berapa hari dalam seminggu yang kamu butuhkan?"
-        : type === "bulanan"
-        ? "Untuk kebutuhan bulanan, saya bisa buatkan paket yang lebih ekonomis. Boleh tahu kira-kira untuk berapa orang dan acara apa saja?"
-        : type === "acara"
-        ? "Untuk acara, biasanya saya tanyakan: berapa jumlah tamu, jenis acara apa, dan apakah ada permintaan khusus untuk menunya?"
-        : "Langsung ke WhatsApp ya, di sana saya bisa bantu lebih detail untuk kebutuhan spesifik kamu.";
-
-    setMessages((prev) => [
-      ...prev,
-      { id: Date.now().toString(), role: "user", text: userText },
-      { id: (Date.now() + 1).toString(), role: "bina", text: binaFollowUp },
-    ]);
-
-    if (type === "langsung") {
-      // Skip to WhatsApp flow
-      setTimeout(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 200);
-    }
-
-    setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 200);
-  };
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
@@ -212,6 +210,7 @@ export default function ConversationFlow({
         id: (Date.now() + 1).toString(),
         role: "bina",
         text: "Baik! Saya catat kebutuhan kamu. Kalau sudah sesuai, pesanan bisa dilanjutkan melalui WhatsApp untuk konfirmasi dan pembayaran.",
+        showCTA: true,
       },
     ];
 
@@ -221,12 +220,6 @@ export default function ConversationFlow({
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
-  };
-
-  const updatedDraft: OrderDraft = {
-    ...orderDraft,
-    request: initialRequest,
-    orderType: selectedOrderType ?? undefined,
   };
 
   return (
@@ -331,69 +324,19 @@ export default function ConversationFlow({
           msg.role === "user" ? (
             <UserMessage key={msg.id} text={msg.text} />
           ) : (
-            <BinaResponse key={msg.id} text={msg.text} />
+            <BinaMessage
+              key={msg.id}
+              text={msg.text}
+              showCTA={msg.showCTA}
+              request={msg.text}
+            />
           )
-        )}
-
-        {/* Order type quick selection */}
-        {showOrderTypes && (
-          <div
-            style={{
-              marginTop: "16px",
-              marginBottom: "8px",
-              animation: "fadeUp 0.4s ease-out both",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "13px",
-                color: "#9B7060",
-                marginBottom: "12px",
-                fontWeight: 500,
-              }}
-            >
-              Mau pesan untuk apa?
-            </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-              {Object.entries(ORDER_TYPE_LABELS).map(([key, label]) => (
-                <button
-                  key={key}
-                  onClick={() => handleSelectOrderType(key as OrderIntent)}
-                  style={{
-                    padding: "8px 14px",
-                    fontSize: "13px",
-                    fontFamily: "'Inter', sans-serif",
-                    fontWeight: 500,
-                    color: key === "langsung" ? "#25D366" : "#7A5240",
-                    backgroundColor: key === "langsung" ? "#E8F7EF" : "#F0E6D8",
-                    border: `1px solid ${key === "langsung" ? "#C8E8D4" : "#E8D8C8"}`,
-                    borderRadius: "999px",
-                    cursor: "pointer",
-                    transition: "background-color 150ms ease, transform 150ms ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.backgroundColor =
-                      key === "langsung" ? "#D0F0E0" : "#E8D0B8";
-                    (e.target as HTMLElement).style.transform = "translateY(-1px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.backgroundColor =
-                      key === "langsung" ? "#E8F7EF" : "#F0E6D8";
-                    (e.target as HTMLElement).style.transform = "translateY(0)";
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
         )}
 
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Bottom section */}
+      {/* Input */}
       <div
         style={{
           padding: "12px 16px",
@@ -403,17 +346,8 @@ export default function ConversationFlow({
           flexShrink: 0,
         }}
       >
-        {/* WhatsApp CTA */}
-        <WhatsAppCTA
-          request={updatedDraft.request}
-          orderType={selectedOrderType ?? undefined}
-          variant="card"
-        />
-
-        {/* Input fallback */}
         <div
           style={{
-            marginTop: "10px",
             display: "flex",
             gap: "8px",
             alignItems: "center",
