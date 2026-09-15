@@ -202,21 +202,8 @@ export default function AboutSection() {
                   border: "1px solid #E8D8C8",
                   boxShadow: "0 3px 12px rgba(78,46,30,0.06)",
                   position: "relative",
-                  overflow: "hidden",
                 }}
               >
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: "4px",
-                    background:
-                      "linear-gradient(to bottom, #C45A3A, #5B7F3A)",
-                    borderRadius: "4px 0 0 4px",
-                  }}
-                />
                 <p
                   style={{
                     fontFamily: "'Playfair Display', Georgia, serif",
@@ -229,33 +216,17 @@ export default function AboutSection() {
                 >
                   "Kalau punya kebutuhan makan, tinggal bilang."
                 </p>
-                <div
+                <p
                   style={{
                     marginTop: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "11px",
+                    color: "#9B7060",
+                    fontWeight: 500,
                   }}
                 >
-                  <div
-                    style={{
-                      width: "20px",
-                      height: "2px",
-                      backgroundColor: "#C45A3A",
-                      borderRadius: "1px",
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "11px",
-                      color: "#9B7060",
-                      fontWeight: 500,
-                    }}
-                  >
-                    — Bu Bina, Pendiri Waroeng Bu Bina
-                  </span>
-                </div>
+                  — Bu Bina
+                </p>
               </div>
             </div>
           </div>
