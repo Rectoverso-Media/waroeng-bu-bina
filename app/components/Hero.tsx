@@ -83,37 +83,6 @@ export default function Hero({ onRequest }: HeroProps) {
         />
 
 
-        {/* Slogan overlay on lower food photo */}
-        <div
-          className="animate-fade-up stagger-5"
-          style={{
-            position: "absolute",
-            bottom: "78px",
-            left: "20px",
-            right: "20px",
-            zIndex: 2,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontStyle: "italic",
-              fontSize: "clamp(16px, 4.5vw, 18px)",
-              color: "#FDF9F4",
-              textShadow: "0 2px 12px rgba(78,46,30,0.8)",
-              margin: 0,
-              lineHeight: 1.4,
-              fontWeight: 600,
-              maxWidth: "85%",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Masakan rumahan, untuk hari
-            <br />
-            yang lebih baik.{" "}
-            <span style={{ color: "#F4A4A4" }}>♡</span>
-          </p>
-        </div>
       </div>
 
       {/* ── Text + input block — overlaps image bottom ── */}
