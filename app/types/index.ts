@@ -6,6 +6,8 @@ export interface MenuItem {
   priceFormatted: string;
   category: string;
   description?: string;
+  image?: string;
+  featured?: boolean;
 }
 
 // ─── Order Intent Types ──────────────────────────────────────────────────────

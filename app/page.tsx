@@ -225,7 +225,7 @@ export default function HomePage() {
         <SectionDivider />
 
         {/* Menu Section */}
-        <MenuSection onViewAll={() => handleRequest("Lihat semua menu")} />
+        <MenuSection />
 
         <SectionDivider />
 

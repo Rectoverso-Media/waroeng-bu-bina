@@ -78,8 +78,8 @@ export default function WhatsAppCTA({
         className="animate-fade-in"
       >
         <a
-          href={whatsappUrl}
-          target="_blank"
+          href={state === "default" ? "/order" : whatsappUrl}
+          target={state === "default" ? "_self" : "_blank"}
           rel="noopener noreferrer"
           aria-label={ctaText}
           style={{

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Pencil, ArrowRight, Sparkles } from "lucide-react";
+import { Pencil, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { suggestions } from "@/app/data/menu";
 import { TypewriterSequence } from "./TypewriterText";
@@ -82,40 +82,6 @@ export default function Hero({ onRequest }: HeroProps) {
           }}
         />
 
-        {/* Eyebrow badge — "Premium & Homemade" tag floating on top of image */}
-        <div
-          className="animate-slide-down"
-          style={{
-            position: "absolute",
-            top: "82px",
-            left: "20px",
-            zIndex: 2,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-            padding: "6px 14px",
-            backgroundColor: "rgba(253,249,244,0.94)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
-            borderRadius: "999px",
-            border: "1px solid rgba(232,216,200,0.7)",
-            boxShadow: "0 2px 8px rgba(78,46,30,0.10)",
-          }}
-        >
-          <Sparkles size={11} color="#C45A3A" strokeWidth={2.5} />
-          <span
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "10px",
-              fontWeight: 700,
-              color: "#4E2E1E",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-            }}
-          >
-            Waroeng Bu Bina
-          </span>
-        </div>
 
         {/* Slogan overlay on lower food photo */}
         <div
@@ -341,20 +307,22 @@ export default function Hero({ onRequest }: HeroProps) {
           </form>
 
           {/* Suggestions */}
-          <div className="animate-fade-up stagger-5" style={{ marginTop: "12px" }}>
+          {/* Suggestions — editorial list style */}
+          <div className="animate-fade-up stagger-5" style={{ marginTop: "14px" }}>
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "11px",
                 color: "#9B7060",
-                marginBottom: "8px",
+                marginBottom: "10px",
                 fontWeight: 500,
                 textAlign: "center",
+                letterSpacing: "0.03em",
               }}
             >
               Atau coba mulai dengan:
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", justifyContent: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               {suggestions.map((s, i) => (
                 <button
                   key={s}
@@ -363,41 +331,36 @@ export default function Hero({ onRequest }: HeroProps) {
                   style={{
                     animationDelay: `${700 + i * 80}ms`,
                     animationFillMode: "both",
-                    padding: "7px 14px",
-                    fontSize: "12px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "9px 14px",
+                    fontSize: "13px",
                     fontFamily: "'Inter', sans-serif",
                     fontWeight: 500,
-                    color: "#C45A3A",
-                    backgroundColor: "#FDF9F4",
-                    border: "1.5px solid rgba(196,90,58,0.18)",
-                    borderRadius: "999px",
+                    color: "#4E2E1E",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    borderBottom: "1px solid #F0E6D8",
                     cursor: "pointer",
-                    transition:
-                      "background-color 150ms ease, transform 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease",
-                    whiteSpace: "nowrap",
-                    boxShadow: "0 1px 4px rgba(78,46,30,0.06)",
+                    transition: "color 150ms ease, background-color 150ms ease",
+                    textAlign: "left",
+                    width: "100%",
+                    borderRadius: "0",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "rgba(196,90,58,0.06)";
-                    e.currentTarget.style.color = "#A84830";
-                    e.currentTarget.style.borderColor = "rgba(196,90,58,0.35)";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "0 3px 8px rgba(196,90,58,0.14)";
+                    e.currentTarget.style.color = "#C45A3A";
+                    e.currentTarget.style.backgroundColor = "rgba(196,90,58,0.04)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#FDF9F4";
-                    e.currentTarget.style.color = "#C45A3A";
-                    e.currentTarget.style.borderColor = "rgba(196,90,58,0.18)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 1px 4px rgba(78,46,30,0.06)";
-                  }}
-                  onMouseDown={(e) => {
-                    e.currentTarget.style.transform = "translateY(0) scale(0.96)";
-                  }}
-                  onMouseUp={(e) => {
-                    e.currentTarget.style.transform = "translateY(-2px) scale(1)";
+                    e.currentTarget.style.color = "#4E2E1E";
+                    e.currentTarget.style.backgroundColor = "transparent";
                   }}
                 >
+                  {/* Small terracotta arrow */}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
+                    <path d="M3 7h8M8 4l3 3-3 3" stroke="#C45A3A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                   {s}
                 </button>
               ))}

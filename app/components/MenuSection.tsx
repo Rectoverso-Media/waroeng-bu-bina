@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { menuItems } from "@/app/data/menu";
 import RevealOnScroll from "./RevealOnScroll";
@@ -164,10 +165,10 @@ function MenuCard({ item }: { item: (typeof menuItems)[0] }) {
 }
 
 interface MenuSectionProps {
-  onViewAll?: () => void;
+  limit?: number;
 }
 
-export default function MenuSection({ onViewAll }: MenuSectionProps) {
+export default function MenuSection({ limit = 20 }: MenuSectionProps) {
   return (
     <section
       id="menu"
@@ -235,8 +236,8 @@ export default function MenuSection({ onViewAll }: MenuSectionProps) {
                 }}
               />
             </div>
-            <button
-              onClick={onViewAll}
+            <Link
+              href="/menu"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -252,6 +253,7 @@ export default function MenuSection({ onViewAll }: MenuSectionProps) {
                 borderRadius: "10px",
                 transition: "color 150ms ease, background-color 150ms ease",
                 marginBottom: "4px",
+                textDecoration: "none",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#F0E6D8";
@@ -262,7 +264,7 @@ export default function MenuSection({ onViewAll }: MenuSectionProps) {
             >
               Lihat semua
               <ChevronRight size={14} />
-            </button>
+            </Link>
           </div>
           <p
             style={{
@@ -307,8 +309,8 @@ export default function MenuSection({ onViewAll }: MenuSectionProps) {
         ))}
 
         {/* "See all" placeholder card — uniform size */}
-        <button
-          onClick={onViewAll}
+        <Link
+          href="/menu"
           style={{
             width: "165px",
             height: "230px",
@@ -325,6 +327,7 @@ export default function MenuSection({ onViewAll }: MenuSectionProps) {
             transition:
               "border-color 150ms ease, background-color 150ms ease, transform 200ms ease",
             scrollSnapAlign: "start",
+            textDecoration: "none",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = "#B3835F";
@@ -360,7 +363,7 @@ export default function MenuSection({ onViewAll }: MenuSectionProps) {
           >
             Lihat semua
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

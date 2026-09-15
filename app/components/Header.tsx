@@ -103,36 +103,6 @@ export default function Header() {
             />
           </div>
 
-          {/* WhatsApp */}
-          <a
-            href="https://wa.me/62818190692"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat WhatsApp"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "10px",
-              color: "#25D366",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "10px",
-              textDecoration: "none",
-              transition: "background-color 150ms ease",
-              minWidth: "44px",
-              minHeight: "44px",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#E8F7EF";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "transparent";
-            }}
-          >
-            <MessageCircle size={26} strokeWidth={2} fill="#25D366" />
-          </a>
         </div>
       </header>
 
@@ -218,10 +188,11 @@ export default function Header() {
             {/* Nav */}
             <nav style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1 }}>
               {[
-                { label: "Beranda", href: "#hero" },
-                { label: "Menu", href: "#menu" },
+                { label: "Beranda", href: "/" },
+                { label: "Menu", href: "/menu" },
+                { label: "Pesan Sekarang", href: "/order" },
                 { label: "Tentang Kami", href: "#tentang" },
-                { label: "Pesan WhatsApp", href: "https://wa.me/62818190692", external: true },
+                { label: "Chat WhatsApp", href: "https://wa.me/62818190692", external: true },
               ].map((item) =>
                 item.external ? (
                   <a

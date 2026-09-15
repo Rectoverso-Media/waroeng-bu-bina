@@ -126,6 +126,16 @@ body {
   50%       { transform: translateY(-3px) rotate(0.5deg); }
 }
 
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0.9); opacity: 0; }
+  70%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 /* ─── Animation Classes ────────────────────────────────────────────────────── */
 .animate-fade-up {
   animation: fadeUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;

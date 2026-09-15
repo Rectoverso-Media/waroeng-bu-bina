@@ -6,16 +6,19 @@ export const menuItems: MenuItem[] = [
     name: "Ayam Bakar",
     price: 25000,
     priceFormatted: "Rp 25.000 / porsi",
-    category: "utama",
+    category: "makanan",
     description: "Ayam bakar dengan bumbu rempah pilihan.",
+    image: "/assets/hero/hero-food.png",
+    featured: true,
   },
   {
     id: "ayam-goreng",
     name: "Ayam Goreng",
     price: 22000,
     priceFormatted: "Rp 22.000 / porsi",
-    category: "utama",
+    category: "makanan",
     description: "Ayam goreng renyah di luar, lembut di dalam.",
+    image: "/assets/hero/hero-food.png",
   },
   {
     id: "sayur-asem",
@@ -24,6 +27,7 @@ export const menuItems: MenuItem[] = [
     priceFormatted: "Rp 15.000 / porsi",
     category: "sayuran",
     description: "Sayur asem segar dengan bumbu tradisional.",
+    image: "/assets/hero/hero-food.png",
   },
   {
     id: "tumis-kangkung",
@@ -32,6 +36,7 @@ export const menuItems: MenuItem[] = [
     priceFormatted: "Rp 12.000 / porsi",
     category: "sayuran",
     description: "Kangkung tumis dengan bawang dan cabai.",
+    image: "/assets/hero/hero-food.png",
   },
 ];
 
