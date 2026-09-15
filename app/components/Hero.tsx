@@ -155,7 +155,7 @@ export default function Hero({ onRequest }: HeroProps) {
               marginRight: "auto",
             }}
           >
-            Ceritakan kebutuhan makanan Anda.{" "}
+            Ceritakan kebutuhan makanan kamu.{" "}
             <strong style={{ color: "#4E2E1E", fontWeight: 700 }}>Bu Bina</strong>{" "}
             akan membantu menyiapkannya.
           </p>
@@ -182,19 +182,6 @@ export default function Hero({ onRequest }: HeroProps) {
               <div
                 style={{
                   position: "absolute",
-                  left: 0,
-                  top: 0,
-                  bottom: 0,
-                  width: "4px",
-                  background:
-                    "linear-gradient(to bottom, #C45A3A, #B3835F)",
-                  borderRadius: "16px 0 0 16px",
-                }}
-              />
-
-              <div
-                style={{
-                  position: "absolute",
                   left: "16px",
                   top: "50%",
                   transform: "translateY(-50%)",
@@ -214,7 +201,7 @@ export default function Hero({ onRequest }: HeroProps) {
                 onFocus={() => setInputFocused(true)}
                 onBlur={() => setInputFocused(false)}
                 placeholder="Contoh: Ayam bakar untuk 5 orang..."
-                aria-label="Ketik kebutuhan makanan Anda"
+                aria-label="Ketik kebutuhan makanan kamu"
                 style={{
                   width: "100%",
                   padding: "14px 48px 14px 42px",

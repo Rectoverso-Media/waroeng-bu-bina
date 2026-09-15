@@ -82,7 +82,7 @@ export default function ConfirmedPage() {
           maxWidth: "320px",
         }}
       >
-        Pesanan Anda sudah diterima. <strong style={{ color: "#4E2E1E", fontWeight: 600 }}>Bu Bina</strong> akan segera menghubungi Anda via WhatsApp untuk konfirmasi.
+        Pesanan kamu sudah diterima. <strong style={{ color: "#4E2E1E", fontWeight: 600 }}>Bu Bina</strong> akan segera menghubungi kamu via WhatsApp untuk konfirmasi.
       </p>
 
       {/* Order card */}
@@ -229,7 +229,7 @@ export default function ConfirmedPage() {
           e.currentTarget.style.color = "#9B7060";
         }}
       >
-        Kembali ke Beranda
+        Kembali ke Berkamu
       </Link>
     </div>
   );

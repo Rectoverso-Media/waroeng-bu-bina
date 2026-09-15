@@ -20,10 +20,10 @@ const ORDER_TYPE_LABELS: Record<OrderIntent, string> = {
 };
 
 const BIBA_RESPONSES = [
-  "Bisa! Saya bantu pilihkan yang cocok untuk kebutuhan Anda.",
+  "Bisa! Saya bantu pilihkan yang cocok untuk kebutuhan kamu.",
   "Wah, pilihan yang enak! Saya siap bantu siapkan.",
   "Siap! Saya akan bantu susun menu yang sesuai.",
-  "Mantap! Mari saya bantu carikan yang terbaik untuk Anda.",
+  "Mantap! Mari saya bantu carikan yang terbaik untuk kamu.",
 ];
 
 function BinaResponse({ text }: { text: string }) {
@@ -177,12 +177,12 @@ export default function ConversationFlow({
       type === "hari-ini"
         ? "Baik! Untuk kebutuhan hari ini atau besok, saya bisa bantu siapkan. Mau untuk berapa porsi, dan ada preferensi menu tertentu?"
         : type === "mingguan"
-        ? "Untuk mingguan, saya biasanya susun menu yang variatif supaya tidak monoton. Ada berapa hari dalam seminggu yang Anda butuhkan?"
+        ? "Untuk mingguan, saya biasanya susun menu yang variatif supaya tidak monoton. Ada berapa hari dalam seminggu yang kamu butuhkan?"
         : type === "bulanan"
         ? "Untuk kebutuhan bulanan, saya bisa buatkan paket yang lebih ekonomis. Boleh tahu kira-kira untuk berapa orang dan acara apa saja?"
         : type === "acara"
         ? "Untuk acara, biasanya saya tanyakan: berapa jumlah tamu, jenis acara apa, dan apakah ada permintaan khusus untuk menunya?"
-        : "Langsung ke WhatsApp ya, di sana saya bisa bantu lebih detail untuk kebutuhan spesifik Anda.";
+        : "Langsung ke WhatsApp ya, di sana saya bisa bantu lebih detail untuk kebutuhan spesifik kamu.";
 
     setMessages((prev) => [
       ...prev,
@@ -211,7 +211,7 @@ export default function ConversationFlow({
       {
         id: (Date.now() + 1).toString(),
         role: "bina",
-        text: "Baik! Saya catat kebutuhan Anda. Kalau sudah sesuai, pesanan bisa dilanjutkan melalui WhatsApp untuk konfirmasi dan pembayaran.",
+        text: "Baik! Saya catat kebutuhan kamu. Kalau sudah sesuai, pesanan bisa dilanjutkan melalui WhatsApp untuk konfirmasi dan pembayaran.",
       },
     ];
 
@@ -298,7 +298,7 @@ export default function ConversationFlow({
                 margin: 0,
               }}
             >
-              Ceritakan kebutuhan Anda
+              Ceritakan kebutuhan kamu
             </p>
           </div>
         </div>

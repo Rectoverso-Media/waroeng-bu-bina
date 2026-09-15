@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Waroeng Bu Bina — Masakan Rumahan, untuk Hari yang Lebih Baik",
   description:
-    "Ceritakan kebutuhan makanan Anda. Bu Bina akan membantu menyiapkannya. Masakan rumahan untuk hari yang lebih baik.",
+    "Ceritakan kebutuhan makanan kamu. Bu Bina akan membantu menyiapkannya. Masakan rumahan untuk hari yang lebih baik.",
   icons: {
     icon: "/assets/brand/logo.png",
   },

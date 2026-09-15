@@ -160,7 +160,7 @@ export default function OrderIntentSection({ onSelectIntent }: OrderIntentSectio
               margin: 0,
             }}
           >
-            Berikut cara Bu Bina bisa membantu Anda.
+            Berikut cara Bu Bina bisa membantu kamu.
           </p>
         </div>
       </RevealOnScroll>
@@ -175,7 +175,7 @@ export default function OrderIntentSection({ onSelectIntent }: OrderIntentSectio
           paddingLeft: "20px",
           paddingRight: "20px",
           paddingBottom: "8px",
-          scrollSnapType: "x mandatory",
+          scrollSnapType: "x mkamutory",
           WebkitOverflowScrolling: "touch",
         }}
       >

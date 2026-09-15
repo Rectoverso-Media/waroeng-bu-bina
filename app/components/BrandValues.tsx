@@ -50,9 +50,9 @@ export default function BrandValues() {
     },
     {
       title: "Bisa disesuaikan",
-      subtitle: "Sesuai kebutuhan Anda",
+      subtitle: "Sesuai kebutuhan kamu",
       description:
-        "Tidak ada kebutuhan yang sama. Setiap pesanan disesuaikan dengan jumlah porsi, preferensi, dan kesempatan Anda.",
+        "Tidak ada kebutuhan yang sama. Setiap pesanan disesuaikan dengan jumlah porsi, preferensi, dan kesempatan kamu.",
       icon: (
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           {/* Heart */}

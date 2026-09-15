@@ -161,7 +161,7 @@ export default function OrderPage() {
       <SiteHeader
         backHref="/"
         title="Form Pesanan"
-        subtitle="Isi detail pesanan Anda"
+        subtitle="Isi detail pesanan kamu"
       />
 
       <div style={{ padding: "20px" }}>

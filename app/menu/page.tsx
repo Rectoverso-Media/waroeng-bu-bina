@@ -346,7 +346,7 @@ export default function MenuPage() {
                 lineHeight: 1.6,
               }}
             >
-              Ceritakan kebutuhan Anda dan Bu Bina akan bantu susun menu yang tepat.
+              Ceritakan kebutuhan kamu dan Bu Bina akan bantu susun menu yang tepat.
             </p>
             <Link
               href="/order"

@@ -171,10 +171,10 @@ export default function AboutSection() {
                   margin: "0 0 16px 0",
                 }}
               >
-                Waroeng Bu Bina hadir untuk membantu Anda mendapatkan masakan
+                Waroeng Bu Bina hadir untuk membantu kamu mendapatkan masakan
                 rumahan yang rasanya seperti dimasakkan sendiri. Setiap hidangan
                 disiapkan dengan bahan segar dan penuh perhatian, sesuai kebutuhan
-                Anda.
+                kamu.
               </p>
               <p
                 style={{
@@ -190,7 +190,7 @@ export default function AboutSection() {
                   Bu Bina
                 </strong>{" "}
                 siap membantu menyiapkan makanan yang tepat untuk setiap momen
-                Anda.
+                kamu.
               </p>
 
               {/* Signature quote */}
