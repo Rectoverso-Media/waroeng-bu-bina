@@ -1,11 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, MessageCircle, X } from "lucide-react";
+import { Menu, MessageCircle, X, History } from "lucide-react";
 import { useState, useEffect } from "react";
+import ChatHistoryModal, { ChatHistoryItem } from "./ChatHistoryModal";
 
-export default function Header() {
+interface HeaderProps {
+  onHistorySelect?: (item: ChatHistoryItem) => void;
+}
+
+export default function Header({ onHistorySelect }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -104,8 +110,97 @@ export default function Header() {
               priority
             />
           </div>
+
+          {/* Right side buttons */}
+          <div
+            style={{
+              position: "absolute",
+              right: "20px",
+              display: "flex",
+              alignItems: "center",
+              gap: "2px",
+            }}
+          >
+            {/* History button */}
+            <button
+              onClick={() => setHistoryOpen(true)}
+              aria-label="Riwayat chat"
+              type="button"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: "10px",
+                color: "#4E2E1E",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "10px",
+                transition: "background-color 150ms ease",
+                minWidth: "44px",
+                minHeight: "44px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#F0E6D8";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            >
+              <History size={22} strokeWidth={1.8} />
+            </button>
+
+            {/* AI chat button */}
+            <a
+              href="https://wa.me/62818190692"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat dengan Bu Bina"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px",
+                color: "#4E2E1E",
+                borderRadius: "10px",
+                textDecoration: "none",
+                transition: "background-color 150ms ease",
+                minWidth: "44px",
+                minHeight: "44px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#F0E6D8";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                  stroke="#4E2E1E"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <circle cx="8.5" cy="11.5" r="1" fill="#C45A3A" />
+                <circle cx="12" cy="11.5" r="1" fill="#C45A3A" />
+                <circle cx="15.5" cy="11.5" r="1" fill="#C45A3A" />
+              </svg>
+            </a>
+          </div>
         </div>
       </header>
+
+      {/* Chat History Modal */}
+      {historyOpen && (
+        <ChatHistoryModal
+          onClose={() => setHistoryOpen(false)}
+          onSelect={(item) => {
+            onHistorySelect?.(item);
+          }}
+        />
+      )}
 
       {/* Mobile Menu Drawer — outside <header> for proper stacking */}
       {menuOpen && (

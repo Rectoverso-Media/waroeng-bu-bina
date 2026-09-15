@@ -9,6 +9,7 @@ import BrandValues from "./components/BrandValues";
 import AboutSection from "./components/AboutSection";
 import WhatsAppCTA from "./components/WhatsAppCTA";
 import ConversationFlow from "./components/ConversationFlow";
+import { addChatHistory } from "./components/ChatHistoryModal";
 import type { OrderIntent, OrderDraft } from "./types";
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
@@ -168,6 +169,7 @@ export default function HomePage() {
   const [orderDraft, setOrderDraft] = useState<Partial<OrderDraft>>({});
 
   const handleRequest = (text: string) => {
+    addChatHistory(text);
     setCurrentRequest(text);
     setOrderDraft((prev) => ({ ...prev, request: text }));
     setConversationOpen(true);
@@ -204,7 +206,7 @@ export default function HomePage() {
       }}
     >
       {/* Header */}
-      <Header />
+      <Header onHistorySelect={(item) => handleRequest(item.request)} />
 
       {/* Main content — scrollable */}
       <main
