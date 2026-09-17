@@ -51,9 +51,9 @@ function Footer() {
         <Image
           src="/assets/brand/logo.png"
           alt="Waroeng Bu Bina"
-          width={80}
-          height={22}
-          style={{ objectFit: "contain", height: "22px", width: "auto" }}
+          width={120}
+          height={33}
+          style={{ objectFit: "contain", height: "33px", width: "auto", opacity: 0.85 }}
         />
 
         {/* Brand name */}
