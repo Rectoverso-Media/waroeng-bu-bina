@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import OrderIntentSection from "./components/OrderIntentSection";
@@ -46,24 +47,14 @@ function Footer() {
           gap: "16px",
         }}
       >
-        {/* Logo mark */}
-        <div
-          style={{
-            width: "48px",
-            height: "48px",
-            borderRadius: "50%",
-            backgroundColor: "rgba(255,255,255,0.1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: "20px",
-            fontWeight: 700,
-            color: "#FDF9F4",
-          }}
-        >
-          WB
-        </div>
+        {/* Logo */}
+        <Image
+          src="/assets/brand/logo.png"
+          alt="Waroeng Bu Bina"
+          width={80}
+          height={22}
+          style={{ objectFit: "contain", height: "22px", width: "auto" }}
+        />
 
         {/* Brand name */}
         <p
