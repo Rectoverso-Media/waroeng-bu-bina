@@ -224,7 +224,7 @@ export default function MenuSection({ limit = 20 }: MenuSectionProps) {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Menu hari ini
+                Daftar Menu
               </h2>
               <div
                 style={{
@@ -274,7 +274,7 @@ export default function MenuSection({ limit = 20 }: MenuSectionProps) {
               margin: "6px 0 0 0",
             }}
           >
-            Pilihan favorit pelanggan Waroeng Bu Bina.
+            Pilihan lezat dari Waroeng Bu Bina.
           </p>
         </div>
       </RevealOnScroll>
