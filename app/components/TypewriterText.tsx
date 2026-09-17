@@ -75,7 +75,7 @@ export function TypewriterSequence({
     }
   }, [started, lineIndex, displayed, lines, speed, lineDelay, done, onComplete]);
 
-  const renderLine = (line: string) => {
+  const renderLine = (line: string, block = false) => {
     const parts = line.split(/(\s+)/);
     return parts.map((part, i) => {
       const trimmed = part.trim();
@@ -102,15 +102,15 @@ export function TypewriterSequence({
   };
 
   return (
-    <span>
+    <span style={{ display: "block", whiteSpace: "nowrap" }}>
       {lines.slice(0, lineIndex).map((line, idx) => (
-        <span key={idx} style={{ display: "block", ...lineStyle }}>
+        <span key={idx} style={{ ...lineStyle, whiteSpace: "nowrap", display: "block" }}>
           {renderLine(line)}
         </span>
       ))}
       {/* Current typing line */}
       {lineIndex < lines.length && (
-        <span style={{ display: "block", ...lineStyle }}>
+        <span style={{ ...lineStyle, whiteSpace: "nowrap", display: "block" }}>
           {renderLine(displayed)}
           {showCursor && (
             <span
