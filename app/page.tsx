@@ -49,7 +49,7 @@ function Footer() {
       >
         {/* Logo */}
         <Image
-          src="/assets/brand/logo.png"
+          src="/assets/brand/logo-white.png"
           alt="Waroeng Bu Bina"
           width={160}
           height={44}
